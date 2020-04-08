@@ -4,15 +4,19 @@
 
 
 <h2 *ngIf="winner">
-    Player {{ winner }} won the game!
+    {{ winner }} is the winner!
+</h2>
+
+<h2 *ngIf="draw">
+    No winner, try again!
 </h2>
 
 
 <main>
-    <app-square 
-        *ngFor="let val of squares; let i = index" 
+    <app-square
+        *ngFor="let val of squares; let i = index"
         [value]="val"
-        (click)="makeMove(i)"> 
+        (click)="makeMove(i)">
 
     </app-square>
 </main>

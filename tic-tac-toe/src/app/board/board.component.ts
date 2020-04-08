@@ -7,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
   squares: string[];
+  filledSquares: number;
   xIsNext: boolean;
   winner: string;
+  draw: boolean;
 
   constructor() {}
 
@@ -20,6 +22,8 @@ export class BoardComponent implements OnInit {
     this.squares = Array(9).fill(null);
     this.winner = null;
     this.xIsNext = true;
+    this.draw = false;
+    this.filledSquares = 0;
   }
 
   get player() {
@@ -30,9 +34,13 @@ export class BoardComponent implements OnInit {
     if (!this.squares[idx]) {
       this.squares.splice(idx, 1, this.player);
       this.xIsNext = !this.xIsNext;
+      this.filledSquares++;
     }
 
     this.winner = this.calculateWinner();
+
+    if(this.filledSquares==9 && this.winner == null)
+    this.draw = true;
   }
 
   calculateWinner() {
