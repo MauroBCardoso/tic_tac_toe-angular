@@ -24,6 +24,7 @@ export class BoardComponent implements OnInit {
     this.xIsNext = true;
     this.draw = false;
     this.filledSquares = 0;
+    this.bestMove(this.squares);
   }
 
   get player() {
@@ -41,6 +42,14 @@ export class BoardComponent implements OnInit {
 
     if(this.filledSquares==9 && this.winner == null)
     this.draw = true;
+
+    this.bestMove(this.squares);
+
+    this.winner = this.calculateWinner();
+
+    if(this.filledSquares==9 && this.winner == null)
+    this.draw = true;
+
   }
 
   calculateWinner() {
@@ -65,5 +74,64 @@ export class BoardComponent implements OnInit {
       }
     }
     return null;
+  }
+
+   bestMove(game) {
+    // AI to make its turn
+    let bestScore = -Infinity;
+    let move;
+    for (let i = 0; i < 9; i++) {
+        // Is the spot available?
+        if (game[i] == null) {
+          game[i] = this.player;
+          let score = this.minimax(game, 0, false);
+          game[i] = null;
+          if (score > bestScore) {
+            bestScore = score;
+            move = i;
+          }
+
+      }
+    }
+    this.squares.splice(move, 1, this.player);
+    this.xIsNext = !this.xIsNext;
+    this.filledSquares++;
+  }
+
+   minimax(game, depth, isMaximizing) {
+    let scores = {
+      X: 10,
+      O: -10,
+    };
+    let result = this.calculateWinner();
+    if (result !== null) {
+      return scores[result];
+    }
+
+    if (isMaximizing) {
+      let bestScore = -Infinity;
+      for (let i = 0; i < 9; i++) {
+          // Is the spot available?
+          if (game[i] == null) {
+            game[i] = "X";
+            let score = this.minimax(game, depth + 1, false);
+            game[i] = null;
+            bestScore = Math.max(score, bestScore);
+          }
+        }
+      return bestScore;
+    } else {
+      let bestScore = Infinity;
+      for (let i = 0; i < 9; i++) {
+          // Is the spot available?
+          if (game[i] == null) {
+            game[i] = 'O';
+            let score = this.minimax(game, depth + 1, true);
+            game[i] = null;
+            bestScore = Math.min(score, bestScore);
+          }
+      }
+      return bestScore;
+    }
   }
 }

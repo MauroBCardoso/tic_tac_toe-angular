@@ -3,13 +3,15 @@
 <button (click)="newGame()">Start new Game</button>
 
 
-<h2 *ngIf="winner">
+<h2 *ngIf="draw">
+  No winner, try again!
+</h2>
+
+<h2 *ngIf="!draw">
     {{ winner }} is the winner!
 </h2>
 
-<h2 *ngIf="draw">
-    No winner, try again!
-</h2>
+
 
 
 <main>
