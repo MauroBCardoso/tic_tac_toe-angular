@@ -1,6 +1,10 @@
 <h1>Current Player: {{ player }} </h1>
 
-<button nbButton outline status="danger" (click)="newGame()">Start new Game</button>
+<button nbButton outline status="danger"
+style="font-size:20px;margin:5px"
+(click)="newGame()">Start new Game</button>
+
+<h2></h2>
 
 
 <h2 *ngIf="draw">
