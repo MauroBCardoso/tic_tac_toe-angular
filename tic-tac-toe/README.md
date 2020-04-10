@@ -3,6 +3,14 @@
 This TicTacToe game is versus an AI (that will always play first) that uses the MinMax algorithm.
 Everything was made with Angular and TypeScript.
 
+Nebular,which is an Angular UI was also added to make the app prettier.
+
+The final product is a PWA, deployed in FireBase,it can be downloaded from Google Chrome
+and played in any device that supports PWAs by using the link: 
+
+https://tictactoe-afe66.web.app/
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
 ## Development server
